@@ -1,3 +1,4 @@
+using Scalar.AspNetCore;
 using ZenBlog.API.Endpoints.Registrations;
 
 namespace ZenBlog.API.Extensions;
@@ -11,6 +12,7 @@ public static class AppRegistrations
         if (app.Environment.IsDevelopment())
         {
             app.MapOpenApi();
+            app.MapScalarApiReference();
         }
 
         app.UseHttpsRedirection();
