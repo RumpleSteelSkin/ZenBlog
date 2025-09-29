@@ -1,0 +1,52 @@
+using System.Linq.Expressions;
+using Microsoft.EntityFrameworkCore;
+using ZenBlog.Application.Contracts.Persistence;
+using ZenBlog.Domain.Entities.Common;
+using ZenBlog.Persistence.Context;
+
+namespace ZenBlog.Persistence.Concrete;
+
+public class GenericRepository<TEntity>(AppDbContext context) : IRepository<TEntity> where TEntity : BaseEntity
+{
+    private readonly DbSet<TEntity> _table = context.Set<TEntity>();
+
+    public async Task<List<TEntity>> GetAllAsync()
+    {
+        return await _table.AsNoTracking().ToListAsync();
+    }
+
+    public async Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> filter)
+    {
+        return await _table.AsNoTracking().Where(filter).ToListAsync();
+    }
+
+    public IQueryable<TEntity> GetQuery()
+    {
+        return _table;
+    }
+
+    public async Task<TEntity?> GetByIdAsync(Guid id)
+    {
+        return await _table.FindAsync(id);
+    }
+
+    public async Task<TEntity?> GetSingleAsync(Expression<Func<TEntity, bool>> filter)
+    {
+        return await _table.AsNoTracking().FirstOrDefaultAsync(filter);
+    }
+
+    public async Task CreateAsync(TEntity entity)
+    {
+        await _table.AddAsync(entity);
+    }
+
+    public void Update(TEntity entity)
+    {
+        _table.Update(entity);
+    }
+
+    public void Delete(TEntity entity)
+    {
+        _table.Remove(entity);
+    }
+}

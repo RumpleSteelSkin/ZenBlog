@@ -19,6 +19,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\Core\ZenBlog.Application\ZenBlog.Application.csproj" />
       <ProjectReference Include="..\..\Core\ZenBlog.Domain\ZenBlog.Domain.csproj" />
     </ItemGroup>
     
