@@ -5,6 +5,7 @@ using ZenBlog.Application.Contracts.Persistence;
 using ZenBlog.Domain.Entities;
 using ZenBlog.Persistence.Concrete;
 using ZenBlog.Persistence.Context;
+using ZenBlog.Persistence.Interceptors;
 
 namespace ZenBlog.Persistence.Extensions;
 
@@ -16,6 +17,7 @@ public static class ServiceRegistrations
         services.AddDbContext<AppDbContext>(options =>
         {
             options.UseSqlServer(configuration.GetConnectionString("SqlConnection"));
+            options.AddInterceptors(new AuditDbContextInterceptor());
             options.UseLazyLoadingProxies();
         });
 
