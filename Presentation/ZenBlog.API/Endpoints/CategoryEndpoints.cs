@@ -1,5 +1,6 @@
 using MediatR;
 using ZenBlog.Application.Features.Categories.Commands.Create;
+using ZenBlog.Application.Features.Categories.Commands.Update;
 using ZenBlog.Application.Features.Categories.Queries.GetAllCategories;
 using ZenBlog.Application.Features.Categories.Queries.GetCategoryById;
 
@@ -26,6 +27,12 @@ public static class CategoryEndpoints
         categories.MapPost(string.Empty, async (IMediator mediator, CreateCategoryCommand createCategoryCommand) =>
         {
             var response = await mediator.Send(createCategoryCommand);
+            return response.IsSuccess ? Results.Ok(response) : Results.BadRequest(response);
+        });
+
+        categories.MapPut(string.Empty, async (IMediator mediator, UpdateCategoryCommand updateCategoryCommand) =>
+        {
+            var response = await mediator.Send(updateCategoryCommand);
             return response.IsSuccess ? Results.Ok(response) : Results.BadRequest(response);
         });
     }
