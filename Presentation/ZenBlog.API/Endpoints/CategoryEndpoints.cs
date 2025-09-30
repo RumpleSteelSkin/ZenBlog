@@ -1,5 +1,6 @@
 using MediatR;
 using ZenBlog.Application.Features.Categories.Commands.Create;
+using ZenBlog.Application.Features.Categories.Commands.Remove;
 using ZenBlog.Application.Features.Categories.Commands.Update;
 using ZenBlog.Application.Features.Categories.Queries.GetAllCategories;
 using ZenBlog.Application.Features.Categories.Queries.GetCategoryById;
@@ -30,9 +31,17 @@ public static class CategoryEndpoints
             return response.IsSuccess ? Results.Ok(response) : Results.BadRequest(response);
         });
 
-        categories.MapPut(string.Empty, async (IMediator mediator, UpdateCategoryCommand updateCategoryCommand) =>
+        categories.MapPut("{id:guid}",
+            async (IMediator mediator, Guid id, UpdateCategoryCommand updateCategoryCommand) =>
+            {
+                if (id != updateCategoryCommand.Id) return Results.BadRequest("ID mismatch between URL and body");
+                var response = await mediator.Send(updateCategoryCommand);
+                return response.IsSuccess ? Results.Ok(response) : Results.BadRequest(response);
+            });
+
+        categories.MapDelete("{id:guid}", async (IMediator mediator, Guid id) =>
         {
-            var response = await mediator.Send(updateCategoryCommand);
+            var response = await mediator.Send(new RemoveCategoryCommand(id));
             return response.IsSuccess ? Results.Ok(response) : Results.BadRequest(response);
         });
     }
