@@ -1,4 +1,5 @@
 using AutoMapper;
+using ZenBlog.Application.Features.Categories.Commands.Create;
 using ZenBlog.Application.Features.Categories.Queries.GetAllCategories;
 using ZenBlog.Domain.Entities;
 
@@ -9,5 +10,7 @@ public class CategoryMapping : Profile
     public CategoryMapping()
     {
         CreateMap<Category, GetAllCategoriesQueryResponseDto>();
+        
+        CreateMap<CreateCategoryCommand, Category>();
     }
 }

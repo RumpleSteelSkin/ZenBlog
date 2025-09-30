@@ -1,5 +1,7 @@
+using Microsoft.AspNetCore.Diagnostics;
 using Scalar.AspNetCore;
 using ZenBlog.API.Endpoints.Registrations;
+using ZenBlog.API.Middlewares;
 
 namespace ZenBlog.API.Extensions;
 
@@ -7,7 +9,6 @@ public static class AppRegistrations
 {
     public static void AddZenBlogApiApp(this WebApplication app)
     {
-        app.MapGroup("/api").RegisterEndpoints();
         
         if (app.Environment.IsDevelopment())
         {
@@ -15,8 +16,10 @@ public static class AppRegistrations
             app.MapScalarApiReference();
         }
 
+        app.UseMiddleware<CustomExceptionHandlingMiddleware>();
         app.UseHttpsRedirection();
 
+        app.MapGroup("/api").RegisterEndpoints();
         app.Run();
     }
 }

@@ -6,7 +6,9 @@ namespace ZenBlog.Application.Base;
 public class BaseResult<T>
 {
     public T? Data { get; set; }
-    private IEnumerable<Error>? Errors { get; set; }
+
+    // ReSharper disable once MemberCanBePrivate.Global
+    public IEnumerable<Error>? Errors { get; set; }
 
     [JsonIgnore] public bool IsSuccess => Errors == null || !Errors.Any();
     [JsonIgnore] public bool IsFailure => !IsSuccess;
