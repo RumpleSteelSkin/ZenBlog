@@ -1,5 +1,6 @@
 using MediatR;
 using ZenBlog.Application.Features.Blogs.Commands.Create;
+using ZenBlog.Application.Features.Blogs.Commands.Update;
 using ZenBlog.Application.Features.Blogs.Queries.GetAllBlogs;
 using ZenBlog.Application.Features.Blogs.Queries.GetBlogById;
 
@@ -29,5 +30,13 @@ public static class BlogEndpoints
             var response = await mediator.Send(new GetBlogByIdQuery(id));
             return response.IsSuccess ? Results.Ok(response) : Results.BadRequest(response);
         });
+
+        blogs.MapPut("{id:guid}",
+            async (IMediator mediator, Guid id, UpdateBlogCommand updateBlogCommand) =>
+            {
+                if (id != updateBlogCommand.Id) return Results.BadRequest("ID mismatch between URL and body");
+                var response = await mediator.Send(updateBlogCommand);
+                return response.IsSuccess ? Results.Ok(response) : Results.BadRequest(response);
+            });
     }
 }
