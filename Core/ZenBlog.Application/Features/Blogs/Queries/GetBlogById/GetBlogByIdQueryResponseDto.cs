@@ -1,5 +1,5 @@
 using ZenBlog.Application.Base;
-using ZenBlog.Application.Features.Dtos;
+using ZenBlog.Application.Features.DTOs;
 
 namespace ZenBlog.Application.Features.Blogs.Queries.GetBlogById;
 

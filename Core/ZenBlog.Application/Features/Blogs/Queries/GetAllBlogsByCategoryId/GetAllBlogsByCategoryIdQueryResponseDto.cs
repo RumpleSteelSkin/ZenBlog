@@ -1,9 +1,9 @@
 using ZenBlog.Application.Base;
 using ZenBlog.Application.Features.DTOs;
 
-namespace ZenBlog.Application.Features.Blogs.Queries.GetAllBlogs;
+namespace ZenBlog.Application.Features.Blogs.Queries.GetAllBlogsByCategoryId;
 
-public class GetAllBlogsQueryResponseDto : BaseDto
+public class GetAllBlogsByCategoryIdQueryResponseDto : BaseDto
 {
     public string? Title { get; set; }
     public string? CoverImage { get; set; }

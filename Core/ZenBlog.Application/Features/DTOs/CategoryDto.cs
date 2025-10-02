@@ -1,6 +1,6 @@
 using ZenBlog.Application.Base;
 
-namespace ZenBlog.Application.Features.Dtos;
+namespace ZenBlog.Application.Features.DTOs;
 
 public class CategoryDto : BaseDto
 {

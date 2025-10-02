@@ -3,6 +3,7 @@ using ZenBlog.Application.Features.Blogs.Commands.Create;
 using ZenBlog.Application.Features.Blogs.Commands.Remove;
 using ZenBlog.Application.Features.Blogs.Commands.Update;
 using ZenBlog.Application.Features.Blogs.Queries.GetAllBlogs;
+using ZenBlog.Application.Features.Blogs.Queries.GetAllBlogsByCategoryId;
 using ZenBlog.Application.Features.Blogs.Queries.GetBlogById;
 
 
@@ -32,6 +33,12 @@ public static class BlogEndpoints
             return response.IsSuccess ? Results.Ok(response) : Results.BadRequest(response);
         });
 
+        blogs.MapGet("GetAllBlogsByCategoryId/{id:guid}", async (IMediator mediator, Guid id) =>
+        {
+            var response = await mediator.Send(new GetAllBlogsByCategoryIdQuery(id));
+            return response.IsSuccess ? Results.Ok(response) : Results.BadRequest(response);
+        });
+
         blogs.MapPut("{id:guid}",
             async (IMediator mediator, Guid id, UpdateBlogCommand updateBlogCommand) =>
             {
@@ -39,7 +46,7 @@ public static class BlogEndpoints
                 var response = await mediator.Send(updateBlogCommand);
                 return response.IsSuccess ? Results.Ok(response) : Results.BadRequest(response);
             });
-        
+
         blogs.MapDelete("{id:guid}", async (IMediator mediator, Guid id) =>
         {
             var response = await mediator.Send(new RemoveBlogCommand(id));
