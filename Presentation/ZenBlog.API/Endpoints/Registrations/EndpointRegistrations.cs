@@ -6,5 +6,6 @@ public static class EndpointRegistrations
     {
         app.RegisterCategoryEndpoints();
         app.RegisterBlogEndpoints();
+        app.RegisterUserEndpoints();
     }
 }
