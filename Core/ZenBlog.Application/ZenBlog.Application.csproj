@@ -17,7 +17,6 @@
     </ItemGroup>
     
     <ItemGroup>
-      <Folder Include="Features\Blogs\Commands\Remove\" />
       <Folder Include="Features\Users\Queries\" />
     </ItemGroup>
 
