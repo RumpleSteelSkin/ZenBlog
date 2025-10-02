@@ -1,4 +1,5 @@
 using AutoMapper;
+using ZenBlog.Application.Features.Blogs.Commands.Create;
 using ZenBlog.Application.Features.Blogs.Queries.GetAllBlogs;
 using ZenBlog.Application.Features.Dtos;
 using ZenBlog.Domain.Entities;
@@ -10,6 +11,7 @@ public class BlogMapping : Profile
     public BlogMapping()
     {
         CreateMap<Category, CategoryDto>();
-        CreateMap<Category, GetAllBlogsQueryResponseDto>();
+        CreateMap<Blog, GetAllBlogsQueryResponseDto>();
+        CreateMap<CreateBlogCommand, Blog>();
     }
 }

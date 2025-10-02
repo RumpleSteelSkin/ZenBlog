@@ -17,7 +17,6 @@
     </ItemGroup>
     
     <ItemGroup>
-      <Folder Include="Features\Blogs\Commands\Create\" />
       <Folder Include="Features\Blogs\Commands\Remove\" />
       <Folder Include="Features\Blogs\Commands\Update\" />
       <Folder Include="Features\Blogs\Queries\GetBlogById\" />
