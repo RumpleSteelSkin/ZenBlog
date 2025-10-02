@@ -1,6 +1,7 @@
 using MediatR;
 using ZenBlog.Application.Features.Blogs.Commands.Create;
 using ZenBlog.Application.Features.Blogs.Queries.GetAllBlogs;
+using ZenBlog.Application.Features.Blogs.Queries.GetBlogById;
 
 
 namespace ZenBlog.API.Endpoints;
@@ -20,6 +21,12 @@ public static class BlogEndpoints
         blogs.MapPost(string.Empty, async (IMediator mediator, CreateBlogCommand createBlogCommand) =>
         {
             var response = await mediator.Send(createBlogCommand);
+            return response.IsSuccess ? Results.Ok(response) : Results.BadRequest(response);
+        });
+
+        blogs.MapGet("{id:guid}", async (IMediator mediator, Guid id) =>
+        {
+            var response = await mediator.Send(new GetBlogByIdQuery(id));
             return response.IsSuccess ? Results.Ok(response) : Results.BadRequest(response);
         });
     }
