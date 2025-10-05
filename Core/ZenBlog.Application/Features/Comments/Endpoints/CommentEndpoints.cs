@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using ZenBlog.Application.Features.Comments.Commands.Create;
+using ZenBlog.Application.Features.Comments.Commands.Update;
 using ZenBlog.Application.Features.Comments.Queries.GetAllComments;
 using ZenBlog.Application.Features.Comments.Queries.GetCommentById;
 
@@ -27,6 +28,13 @@ public static class CommentEndpoints
 
         comments.MapPost(string.Empty, async (IMediator mediator, CreateCommentCommand command) =>
         {
+            var response = await mediator.Send(command);
+            return response.IsSuccess ? Results.Ok(response) : Results.NotFound(response);
+        });
+
+        comments.MapPut("{id:guid}", async (IMediator mediator, UpdateCommentCommand command, Guid id) =>
+        {
+            if (id != command.Id) return Results.BadRequest("ID mismatch between URL and body");
             var response = await mediator.Send(command);
             return response.IsSuccess ? Results.Ok(response) : Results.NotFound(response);
         });

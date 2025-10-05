@@ -1,5 +1,6 @@
 using AutoMapper;
 using ZenBlog.Application.Features.Comments.Commands.Create;
+using ZenBlog.Application.Features.Comments.Commands.Update;
 using ZenBlog.Application.Features.Comments.Queries.GetAllComments;
 using ZenBlog.Application.Features.Comments.Queries.GetCommentById;
 using ZenBlog.Application.Features.DTOs;
@@ -17,6 +18,8 @@ public class CommentMapping : Profile
         CreateMap<AppUser, UserDto>();
 
         CreateMap<CreateCommentCommand, Comment>();
+        CreateMap<UpdateCommentCommand, Comment>();
+        CreateMap<Comment, Comment>();
         CreateMap<Comment, GetCommentByIdQueryResponseDto>();
     }
 }
