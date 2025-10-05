@@ -1,6 +1,5 @@
-using Microsoft.AspNetCore.Diagnostics;
 using Scalar.AspNetCore;
-using ZenBlog.API.Endpoints.Registrations;
+using ZenBlog.API.EndpointRegistrations;
 using ZenBlog.API.Middlewares;
 
 namespace ZenBlog.API.Extensions;
@@ -9,7 +8,6 @@ public static class AppRegistrations
 {
     public static void AddZenBlogApiApp(this WebApplication app)
     {
-        
         if (app.Environment.IsDevelopment())
         {
             app.MapOpenApi();

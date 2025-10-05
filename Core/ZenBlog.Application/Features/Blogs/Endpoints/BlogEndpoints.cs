@@ -1,4 +1,7 @@
 using MediatR;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Routing;
 using ZenBlog.Application.Features.Blogs.Commands.Create;
 using ZenBlog.Application.Features.Blogs.Commands.Remove;
 using ZenBlog.Application.Features.Blogs.Commands.Update;
@@ -6,8 +9,7 @@ using ZenBlog.Application.Features.Blogs.Queries.GetAllBlogs;
 using ZenBlog.Application.Features.Blogs.Queries.GetAllBlogsByCategoryId;
 using ZenBlog.Application.Features.Blogs.Queries.GetBlogById;
 
-
-namespace ZenBlog.API.Endpoints;
+namespace ZenBlog.Application.Features.Blogs.Endpoints;
 
 public static class BlogEndpoints
 {
