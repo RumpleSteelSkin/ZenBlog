@@ -1,5 +1,6 @@
 using ZenBlog.Application.Features.Blogs.Endpoints;
 using ZenBlog.Application.Features.Categories.Endpoints;
+using ZenBlog.Application.Features.Comments.Endpoints;
 using ZenBlog.Application.Features.Users.Endpoints;
 
 namespace ZenBlog.API.EndpointRegistrations;
@@ -11,5 +12,6 @@ public static class EndpointRegistrations
         app.RegisterCategoryEndpoints();
         app.RegisterBlogEndpoints();
         app.RegisterUserEndpoints();
+        app.RegisterCommentEndpoints();
     }
 }
