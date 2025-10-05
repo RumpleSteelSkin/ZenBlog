@@ -11,5 +11,4 @@ public class GetAllCommentsQueryResponseDto : BaseDto
     public string? Body { get; set; }
     public DateTime CommentDate { get; set; }
     public Guid BlogId { get; set; }
-    public BlogDto? Blog { get; set; }
 }

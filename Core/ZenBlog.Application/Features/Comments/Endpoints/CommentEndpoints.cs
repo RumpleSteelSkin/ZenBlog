@@ -2,6 +2,7 @@ using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
+using ZenBlog.Application.Features.Comments.Commands.Create;
 using ZenBlog.Application.Features.Comments.Queries.GetAllComments;
 
 namespace ZenBlog.Application.Features.Comments.Endpoints;
@@ -14,6 +15,12 @@ public static class CommentEndpoints
         comments.MapGet(string.Empty, async (IMediator mediator) =>
         {
             var response = await mediator.Send(new GetAllCommentsQuery());
+            return response.IsSuccess ? Results.Ok(response) : Results.NotFound(response);
+        });
+
+        comments.MapPost(string.Empty, async (IMediator mediator, CreateCommentCommand command) =>
+        {
+            var response = await mediator.Send(command);
             return response.IsSuccess ? Results.Ok(response) : Results.NotFound(response);
         });
     }
