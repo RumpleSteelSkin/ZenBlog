@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using ZenBlog.Application.Features.Comments.Commands.Create;
 using ZenBlog.Application.Features.Comments.Queries.GetAllComments;
+using ZenBlog.Application.Features.Comments.Queries.GetCommentById;
 
 namespace ZenBlog.Application.Features.Comments.Endpoints;
 
@@ -15,6 +16,12 @@ public static class CommentEndpoints
         comments.MapGet(string.Empty, async (IMediator mediator) =>
         {
             var response = await mediator.Send(new GetAllCommentsQuery());
+            return response.IsSuccess ? Results.Ok(response) : Results.NotFound(response);
+        });
+
+        comments.MapGet("{id:guid}", async (IMediator mediator, Guid id) =>
+        {
+            var response = await mediator.Send(new GetCommentByIdQuery(id));
             return response.IsSuccess ? Results.Ok(response) : Results.NotFound(response);
         });
 
