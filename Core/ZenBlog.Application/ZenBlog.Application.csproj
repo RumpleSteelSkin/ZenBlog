@@ -18,7 +18,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="Features\Messages\Commands\Update\" />
         <Folder Include="Features\Messages\Queries\GetMessageById\" />
         <Folder Include="Features\Users\Queries\"/>
     </ItemGroup>

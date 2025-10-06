@@ -1,5 +1,6 @@
 using AutoMapper;
 using ZenBlog.Application.Features.Messages.Commands.Create;
+using ZenBlog.Application.Features.Messages.Commands.Update;
 using ZenBlog.Application.Features.Messages.Queries.GetAllMessages;
 using ZenBlog.Domain.Entities;
 
@@ -10,6 +11,7 @@ public class MessageMapping : Profile
     public MessageMapping()
     {
         CreateMap<CreateMessageCommand, Message>();
+        CreateMap<UpdateMessageCommand, Message>();
 
         CreateMap<Message, GetAllMessagesQueryResponseDto>();
     }
