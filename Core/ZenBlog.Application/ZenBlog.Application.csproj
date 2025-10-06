@@ -18,7 +18,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="Features\ContactInfos\Commands\Remove\" />
         <Folder Include="Features\Users\Queries\"/>
     </ItemGroup>
 
