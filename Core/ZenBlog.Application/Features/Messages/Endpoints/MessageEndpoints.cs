@@ -6,6 +6,7 @@ using ZenBlog.Application.Features.Messages.Commands.Create;
 using ZenBlog.Application.Features.Messages.Commands.Remove;
 using ZenBlog.Application.Features.Messages.Commands.Update;
 using ZenBlog.Application.Features.Messages.Queries.GetAllMessages;
+using ZenBlog.Application.Features.Messages.Queries.GetMessageById;
 
 namespace ZenBlog.Application.Features.Messages.Endpoints;
 
@@ -24,6 +25,12 @@ public static class MessageEndpoints
         messages.MapGet(string.Empty, async (IMediator mediator) =>
         {
             var response = await mediator.Send(new GetAllMessagesQuery());
+            return response.IsSuccess ? Results.Ok(response) : Results.BadRequest(response);
+        });
+
+        messages.MapGet("{id:guid}", async (IMediator mediator, Guid id) =>
+        {
+            var response = await mediator.Send(new GetMessageByIdQuery(id));
             return response.IsSuccess ? Results.Ok(response) : Results.BadRequest(response);
         });
 
