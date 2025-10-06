@@ -1,5 +1,6 @@
 using AutoMapper;
 using ZenBlog.Application.Features.SubComments.Commands.Create;
+using ZenBlog.Application.Features.SubComments.Commands.Update;
 using ZenBlog.Application.Features.SubComments.Queries.GetAllSubComments;
 using ZenBlog.Application.Features.SubComments.Queries.GetSubCommentById;
 using ZenBlog.Domain.Entities;
@@ -11,6 +12,7 @@ public class SubCommentMapping : Profile
     public SubCommentMapping()
     {
         CreateMap<CreateSubCommentCommand, SubComment>();
+        CreateMap<UpdateSubCommentCommand, SubComment>();
         CreateMap<SubComment, GetAllSubCommentsQueryResponseDto>();
         CreateMap<SubComment, GetSubCommentByIdQueryResponseDto>();
     }
