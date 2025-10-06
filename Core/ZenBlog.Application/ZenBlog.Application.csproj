@@ -20,7 +20,6 @@
     <ItemGroup>
         <Folder Include="Features\SubComments\Commands\Remove\"/>
         <Folder Include="Features\SubComments\Commands\Update\"/>
-        <Folder Include="Features\SubComments\Queries\GetSubCommentById\"/>
         <Folder Include="Features\Users\Queries\"/>
     </ItemGroup>
 

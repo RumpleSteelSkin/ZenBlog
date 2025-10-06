@@ -1,6 +1,8 @@
+using ZenBlog.Application.Base;
+
 namespace ZenBlog.Application.Features.SubComments.Queries.GetAllSubComments;
 
-public class GetAllSubCommentsQueryResponseDto
+public class GetAllSubCommentsQueryResponseDto : BaseDto
 {
     public string? FirstName { get; set; }
     public string? LastName { get; set; }
