@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using ZenBlog.Application.Features.ContactInfos.Commands.Create;
+using ZenBlog.Application.Features.ContactInfos.Commands.Update;
 using ZenBlog.Application.Features.ContactInfos.Queries.GetAllContactInfos;
 using ZenBlog.Application.Features.ContactInfos.Queries.GetContactInfoById;
 
@@ -28,6 +29,13 @@ public static class ContactInfoEndpoints
 
         contactInfos.MapPost(string.Empty, async (IMediator mediator, CreateContactInfoCommand command) =>
         {
+            var response = await mediator.Send(command);
+            return response.IsSuccess ? Results.Ok(response) : Results.BadRequest(response);
+        });
+
+        contactInfos.MapPut("{id:guid}", async (IMediator mediator, Guid id, UpdateContactInfoCommand command) =>
+        {
+            if (id != command.Id) return Results.BadRequest("ID mismatch between URL and body");
             var response = await mediator.Send(command);
             return response.IsSuccess ? Results.Ok(response) : Results.BadRequest(response);
         });

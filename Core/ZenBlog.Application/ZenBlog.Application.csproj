@@ -19,7 +19,6 @@
 
     <ItemGroup>
         <Folder Include="Features\ContactInfos\Commands\Remove\" />
-        <Folder Include="Features\ContactInfos\Commands\Update\" />
         <Folder Include="Features\Users\Queries\"/>
     </ItemGroup>
 
