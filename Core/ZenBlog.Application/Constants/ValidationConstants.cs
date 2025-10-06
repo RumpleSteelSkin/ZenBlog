@@ -4,6 +4,8 @@ public static class ValidationConstants
 {
     public const string NormalCharacters = @"^[a-zA-ZğüşöçıİĞÜŞÖÇ]+$";
 
+    public const string PhoneNumber = @"^[\d\s\+\-()]+$";
+
     public const string PasswordRegex =
         @"^(?=.*[A-ZİŞĞÜÖÇ])(?=.*[a-zışğüöç])(?=.*\d)(?=.*[!?\*\.])[A-Za-z0-9İŞĞÜÖÇışğüöç!?\*\.]{6,100}$";
 

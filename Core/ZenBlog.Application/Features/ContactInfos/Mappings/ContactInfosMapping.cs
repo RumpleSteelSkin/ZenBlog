@@ -1,4 +1,5 @@
 using AutoMapper;
+using ZenBlog.Application.Features.ContactInfos.Commands.Create;
 using ZenBlog.Application.Features.ContactInfos.Queries.GetAllContactInfos;
 using ZenBlog.Application.Features.ContactInfos.Queries.GetContactInfoById;
 using ZenBlog.Domain.Entities;
@@ -11,5 +12,7 @@ public class ContactInfosMapping : Profile
     {
         CreateMap<ContactInfo, GetAllContactInfosQueryResponseDto>();
         CreateMap<ContactInfo, GetContactInfoByIdQueryResponseDto>();
+        
+        CreateMap<CreateContactInfoCommand, ContactInfo>();
     }
 }

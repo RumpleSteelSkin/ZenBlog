@@ -2,6 +2,7 @@ using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
+using ZenBlog.Application.Features.ContactInfos.Commands.Create;
 using ZenBlog.Application.Features.ContactInfos.Queries.GetAllContactInfos;
 using ZenBlog.Application.Features.ContactInfos.Queries.GetContactInfoById;
 
@@ -11,20 +12,24 @@ public static class ContactInfoEndpoints
 {
     public static void RegisterContactInfoEndpoints(this IEndpointRouteBuilder app)
     {
-        var users = app.MapGroup("/contactinfos").WithTags("ContactInfos");
+        var contactInfos = app.MapGroup("/contactinfos").WithTags("ContactInfos");
 
-        users.MapGet(string.Empty, async (IMediator mediator) =>
+        contactInfos.MapGet(string.Empty, async (IMediator mediator) =>
         {
             var response = await mediator.Send(new GetAllContactInfosQuery());
             return response.IsSuccess ? Results.Ok(response) : Results.BadRequest(response);
         });
 
-        users.MapGet("{id:guid}", async (IMediator mediator, Guid id) =>
+        contactInfos.MapGet("{id:guid}", async (IMediator mediator, Guid id) =>
         {
             var response = await mediator.Send(new GetContactInfoByIdQuery(id));
             return response.IsSuccess ? Results.Ok(response) : Results.BadRequest(response);
         });
-        
-        
+
+        contactInfos.MapPost(string.Empty, async (IMediator mediator, CreateContactInfoCommand command) =>
+        {
+            var response = await mediator.Send(command);
+            return response.IsSuccess ? Results.Ok(response) : Results.BadRequest(response);
+        });
     }
 }
