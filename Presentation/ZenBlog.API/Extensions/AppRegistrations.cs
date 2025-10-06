@@ -12,11 +12,11 @@ public static class AppRegistrations
         {
             app.MapOpenApi();
             app.MapScalarApiReference();
+            app.UseCors("AllowAll");
         }
 
         app.UseMiddleware<CustomExceptionHandlingMiddleware>();
         app.UseHttpsRedirection();
-
         app.MapGroup("/api").RegisterEndpoints();
         app.Run();
     }

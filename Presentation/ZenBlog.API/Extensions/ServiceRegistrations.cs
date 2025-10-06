@@ -10,13 +10,24 @@ public static class ServiceRegistrations
     {
         services.AddZenBlogPersistence(configuration);
         services.AddZenBlogApplication();
+
+        #region CORS Services
         
-        
+        services.AddCors(opt =>
+        {
+            opt.AddPolicy("AllowAll", policy =>
+                policy.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader());
+        });
+
+        #endregion
+
         services.ConfigureHttpJsonOptions(config =>
         {
             config.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
         });
-        
+
         services.AddOpenApi();
         return services;
     }
