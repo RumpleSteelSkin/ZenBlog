@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using ZenBlog.Application.Features.Messages.Commands.Create;
+using ZenBlog.Application.Features.Messages.Queries.GetAllMessages;
 
 namespace ZenBlog.Application.Features.Messages.Endpoints;
 
@@ -15,6 +16,12 @@ public static class MessageEndpoints
         messages.MapPost(string.Empty, async (IMediator mediator, CreateMessageCommand command) =>
         {
             var response = await mediator.Send(command);
+            return response.IsSuccess ? Results.Ok(response) : Results.BadRequest(response);
+        });
+
+        messages.MapGet(string.Empty, async (IMediator mediator) =>
+        {
+            var response = await mediator.Send(new GetAllMessagesQuery());
             return response.IsSuccess ? Results.Ok(response) : Results.BadRequest(response);
         });
     }
