@@ -21,7 +21,6 @@
         <Folder Include="Features\ContactInfos\Commands\Create\" />
         <Folder Include="Features\ContactInfos\Commands\Remove\" />
         <Folder Include="Features\ContactInfos\Commands\Update\" />
-        <Folder Include="Features\ContactInfos\Queries\GetContactInfoById\" />
         <Folder Include="Features\Users\Queries\"/>
     </ItemGroup>
 
