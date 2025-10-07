@@ -1,4 +1,5 @@
 using AutoMapper;
+using ZenBlog.Application.Features.DTOs;
 using ZenBlog.Application.Features.Users.Commands.Create;
 using ZenBlog.Domain.Entities;
 
@@ -9,5 +10,6 @@ public class UserMapping : Profile
     public UserMapping()
     {
         CreateMap<CreateUserCommand, AppUser>();
+        CreateMap<AppUser, UserDto>();
     }
 }

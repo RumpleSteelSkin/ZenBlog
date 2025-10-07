@@ -17,7 +17,9 @@ public static class AppRegistrations
 
         app.UseMiddleware<CustomExceptionHandlingMiddleware>();
         app.UseHttpsRedirection();
-        app.MapGroup("/api").RegisterEndpoints();
+        app.UseAuthentication();
+        app.UseAuthorization();
+        app.MapGroup("/api").RequireAuthorization().RegisterEndpoints();
         app.Run();
     }
 }

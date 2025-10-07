@@ -9,10 +9,10 @@ public static class ServiceRegistrations
     public static IServiceCollection AddZenBlogApi(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddZenBlogPersistence(configuration);
-        services.AddZenBlogApplication();
+        services.AddZenBlogApplication(configuration);
 
         #region CORS Services
-        
+
         services.AddCors(opt =>
         {
             opt.AddPolicy("AllowAll", policy =>
@@ -29,6 +29,7 @@ public static class ServiceRegistrations
         });
 
         services.AddOpenApi();
+        services.AddAuthorization();
         return services;
     }
 }
