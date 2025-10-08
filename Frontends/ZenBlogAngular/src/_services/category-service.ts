@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {ResultDTO} from '../_models/Base/ResultDTO';
 import {CategoryResponseDTO} from '../_models/Categories/CategoryResponseDTO';
 import {CategoryCreateDTO} from '../_models/Categories/CategoryCreateDTO';
+import {CategoryUpdateDTO} from '../_models/Categories/CategoryUpdateDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -18,11 +19,14 @@ export class CategoryService {
   }
 
   create(categoryCreateDto: CategoryCreateDTO) {
-    return this.http.post<ResultDTO<CategoryResponseDTO>>(this.baseUrl+"/", categoryCreateDto);
+    return this.http.post<ResultDTO<CategoryResponseDTO>>(this.baseUrl + "/", categoryCreateDto);
   }
 
-  remove(id: number) {
+  remove(id: string) {
     return this.http.delete(`${this.baseUrl}/${id}`);
   }
 
+  update(categoryUpdateDto: CategoryUpdateDTO) {
+    return this.http.put(`${this.baseUrl}/${categoryUpdateDto.id}`, categoryUpdateDto);
+  }
 }

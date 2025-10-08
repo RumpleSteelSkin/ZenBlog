@@ -1,57 +1,115 @@
-import {Component} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {Modal} from 'bootstrap';
 import {CategoryService} from '../../../_services/category-service';
-import {DatePipe} from '@angular/common';
+import {SweetalertService} from '../../../_services/sweetalert-service';
 import {CategoryResponseDTO} from '../../../_models/Categories/CategoryResponseDTO';
 import {CategoryCreateDTO} from '../../../_models/Categories/CategoryCreateDTO';
-import {FormsModule} from '@angular/forms';
+import {CategoryUpdateDTO} from '../../../_models/Categories/CategoryUpdateDTO';
+import {DatePipe} from '@angular/common';
 
 declare const alertify: any;
 
 @Component({
   selector: 'category',
-  imports: [
-    DatePipe,
-    FormsModule
-  ],
   templateUrl: './category.html',
-  styleUrl: './category.css'
+  styleUrls: ['./category.css'],
+  imports: [FormsModule, DatePipe]
 })
-export class Category {
+export class Category implements AfterViewInit {
   categories: CategoryResponseDTO[] = [];
   newCategory: CategoryCreateDTO = new CategoryCreateDTO();
-  selectedId: number;
-  errors: any = [];
+  editCategory: CategoryUpdateDTO = new CategoryUpdateDTO();
+  errors: any[] = [];
 
-  constructor(private categoryService: CategoryService) {
+  @ViewChild('updateModal', {static: false}) updateModal!: ElementRef;
+  @ViewChild('createModal', {static: false}) createModal!: ElementRef;
+
+  private modalInstances: Map<ElementRef, Modal> = new Map();
+
+  constructor(private categoryService: CategoryService, private sweetalertService: SweetalertService) {
     this.get();
+  }
+
+  ngAfterViewInit(): void {
+    if (this.createModal) {
+      this.modalInstances.set(this.createModal, new Modal(this.createModal.nativeElement));
+    }
+    if (this.updateModal) {
+      this.modalInstances.set(this.updateModal, new Modal(this.updateModal.nativeElement));
+    }
   }
 
   get() {
     this.categoryService.get().subscribe({
-      next: result => {
-        this.categories = result.data;
-      },
-      error: result => alertify.error(result.error.errors[0].errorMessage),
+      next: res => this.categories = res.data,
+      error: err => alertify.error(err.error.errors[0]?.errorMessage)
     });
   }
 
-  create() {
+  create(form: any) {
     this.categoryService.create(this.newCategory).subscribe({
-      next: result => {
-        this.newCategory = {name: ''};
+      next: () => {
+        this.errors = [];
+        form.resetForm();
+        this.modalInstances.get(this.createModal)?.hide();
+        this.forceCleanup();
+        this.get();
+        alertify.success("Category Created Successfully");
       },
-      error: result => {
-        alertify.error("An error occurred");
-        if (result.status === 400) {
-          this.errors = result.error.errors;
+      error: err => {
+        if (err.status === 400) {
+          this.errors = err.error.errors;
         }
-        alertify.error(result.error.errors[0].errorMessage)
-      },
-      complete: () => {
-        alertify.success("Category Created Successfully")
-        location.reload()
+        alertify.error("An error occurred");
       }
     });
   }
-}
 
+  onSelected(model: CategoryUpdateDTO) {
+    this.editCategory = structuredClone(model);
+    this.errors = [];
+  }
+
+  update(form: any) {
+    this.categoryService.update(this.editCategory).subscribe({
+      next: () => {
+        this.errors = [];
+        form.resetForm();
+        this.modalInstances.get(this.updateModal)?.hide();
+        this.forceCleanup();
+        this.get();
+        alertify.success("Category Updated Successfully");
+      },
+      error: err => {
+        if (err.status === 400) {
+          this.errors = err.error.errors;
+        }
+        alertify.error("An error occurred");
+      }
+    });
+  }
+
+  async delete(id: string) {
+    const confirmed = await this.sweetalertService.areYouSure();
+    if (confirmed) {
+      this.categoryService.remove(id).subscribe({
+        next: () => {
+          this.get();
+          alertify.success("Category Deleted Successfully");
+        },
+        error: err => alertify.error("An error occurred")
+      });
+    }
+  }
+
+
+  private forceCleanup() {
+    document.body.classList.remove('modal-open');
+    document.body.style.removeProperty('padding-right');
+    const backdrops = document.getElementsByClassName('modal-backdrop');
+    while (backdrops.length > 0) {
+      backdrops[0].remove();
+    }
+  }
+}
