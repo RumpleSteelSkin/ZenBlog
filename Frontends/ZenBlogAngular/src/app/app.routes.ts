@@ -1,3 +1,14 @@
-import { Routes } from '@angular/router';
+import {Routes} from '@angular/router';
+import {MainLayout} from '../_components/_layouts/main-layout/main-layout';
+import {Home} from '../_components/main/home/home';
+import {AdminLayout} from '../_components/_layouts/admin-layout/admin-layout';
+import {Category} from '../_components/admin/category/category';
 
-export const routes: Routes = [];
+export const routes: Routes = [
+  //Main Routes
+  {path: '', component: MainLayout, children: [{path: '', component: Home}]},
+
+
+  //Admin Routes
+  {path: 'admin', component: AdminLayout, children: [{path: 'category', component: Category}]},
+];

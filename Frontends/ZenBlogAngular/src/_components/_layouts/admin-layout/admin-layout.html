@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+</head>
+<body>
+
+<main class="d-flex flex-nowrap" style="height: 100vh;">
+  <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 280px">
+    <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+      <i class="bi bi-command" style="font-size: 35px;"></i>
+      <span class="fs-4 mx-4">Admin Panel</span>
+    </a>
+    <hr/>
+    <ul class="nav nav-pills flex-column mb-auto">
+      <li class="nav-item">
+        <a routerLink="/admin/category" routerLinkActive="active" class="nav-link text-white" aria-current="page">
+          <i class="bi bi-list"></i> Categories
+        </a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="/admin/blog" routerLinkActive="active" class="nav-link text-white" aria-current="page">
+          <i class="bi bi-image"></i> Blogs
+        </a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="/admin/comment" routerLinkActive="active" class="nav-link text-white" aria-current="page">
+          <i class="bi bi-archive"></i> Comments
+        </a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="/admin/contactinfo" routerLinkActive="active" class="nav-link text-white" aria-current="page">
+          <i class="bi bi-people"></i> Contact Info
+        </a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="/admin/message" routerLinkActive="active" class="nav-link text-white" aria-current="page">
+          <i class="bi bi-envelope"></i> Messages
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a routerLink="/admin/social" routerLinkActive="active" class="nav-link text-white" aria-current="page">
+          <i class="bi bi-linkedin"></i> Social Networks
+        </a>
+      </li>
+    </ul>
+    <hr/>
+    <div class="dropdown"><a class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+                             data-bs-toggle="dropdown" aria-expanded="false">
+      <img class="rounded-circle me-2" height="32" ngSrc="https://github.com/mdo.png" width="32"/>
+      <strong>Name</strong>
+      <!--        <strong>{{getUserName()}}</strong>-->
+    </a>
+      <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+        <li><a class="dropdown-item">Settings</a></li>
+        <li><a class="dropdown-item">Profile</a></li>
+        <li>
+          <hr class="dropdown-divider"/>
+        </li>
+        <li>
+          <!--          <button class="dropdown-item" (click)="logout()">Sign out</button>-->
+          <a class="btn btn-warning">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="flex-grow-1 overflow-auto p-3">
+    <div class="container">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+
+</main>
+</body>
+</html>
