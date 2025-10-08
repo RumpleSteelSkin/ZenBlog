@@ -1,1 +1,133 @@
-<p>blog works!</p>
+<h1>Blogs</h1>
+
+<table class="table table-primary table-hover table-striped-columns table-bordered"
+       style="border: 3px darkslateblue solid;">
+  <thead>
+  <tr>
+    <th>#</th>
+    <th>Cover Image</th>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Category</th>
+    <th>Created At</th>
+    <th>Updated At</th>
+    <th>Options</th>
+  </tr>
+  </thead>
+
+  <tbody class="table-group-divider">
+    @for (item of blogs; track item.id; let i = $index) {
+      <tr>
+        <th>{{ i + 1 }}</th>
+        <td><img alt="Cover Image" src="{{item.coverImage}}" class="img-thumbnail"/></td>
+        <td>{{ item.title }}</td>
+        <td>{{ item.description }}</td>
+        <td>{{ item.category.name }}</td>
+        <td>{{ item.createdAt.toLocaleString() | date:'dd/MM/yyyy HH:mm:ss' }}</td>
+        <td>{{ item.updatedAt.toLocaleString() | date:'dd/MM/yyyy HH:mm:ss' }}</td>
+        <td style="width: 100px; white-space: nowrap;">
+          <button class="btn btn-danger mx-1" (click)="delete(item.id)">
+            <i class="bi bi-trash3"></i>
+          </button>
+          <button class="btn btn-warning mx-1" (click)="onSelected(item)" data-bs-toggle="modal"
+                  data-bs-target="#updateModal">
+            <i class="bi bi-pencil-square"></i>
+          </button>
+        </td>
+      </tr>
+    }
+  <tr>
+    <th colspan="7"></th>
+    <th>
+      <button class="btn btn-success m-3"
+              (click)="newBlog = { title: '', blogImage:'',coverImage:'',userId:'',categoryId:'',description:'' }"
+              data-bs-toggle="modal"
+              data-bs-target="#createModal">
+        <i class="bi bi-plus-square"></i> New
+      </button>
+    </th>
+  </tr>
+  </tbody>
+</table>
+
+<!-- Create Modal -->
+<div class="modal fade" id="createModal" #createModal tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <form #createForm="ngForm" (ngSubmit)="create(createForm)">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Create New Blog</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <label for="createCoverImage">Cover Image</label>
+          <input type="text" [(ngModel)]="newBlog.coverImage" name="title" class="form-control" id="createCoverImage" required>
+          <label for="createBlogImage">Blog Image</label>
+          <input type="text" [(ngModel)]="newBlog.blogImage" name="title" class="form-control" id="createBlogImage" required>
+          <label for="createTitle">Title</label>
+          <input type="text" [(ngModel)]="newBlog.title" name="title" class="form-control" id="createTitle" required>
+          <label for="createDescription">Description</label>
+          <input type="text" [(ngModel)]="newBlog.description" name="title" class="form-control" id="createDescription"
+                 required>
+          <label for="inputGroupSelect01">Category</label>
+          <select [(ngModel)]="newBlog.categoryId" name="categoryId" class="form-select form-control"
+                  id="inputGroupSelect01"><br>
+            @for (item of categories; track item.id) {
+              <option value="{{item.id}}">{{ item.name }}</option>
+            }
+          </select>
+          @if (errors.length) {
+            @for (err of errors; track errors) {
+              <span class="text-danger">{{ err.errorMessage }}</span>
+            }
+          }
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-success" [disabled]="createForm.invalid">Create</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Update Modal -->
+<div class="modal fade" id="updateModal" #updateModal tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <form #updateForm="ngForm" (ngSubmit)="update(updateForm)">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Update Blog</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <label for="updateCoverImage">Cover Image</label>
+          <input type="text" [(ngModel)]="editBlog.coverImage" name="title" class="form-control" id="updateCoverImage" required>
+          <label for="updateBlogImage">Blog Image</label>
+          <input type="text" [(ngModel)]="editBlog.blogImage" name="title" class="form-control" id="updateBlogImage" required>
+          <label for="updateTitle">Title</label>
+          <input type="text" [(ngModel)]="editBlog.title" name="title" class="form-control" id="updateTitle" required>
+          <label for="updateDescription">Description</label>
+          <input type="text" [(ngModel)]="editBlog.description" name="title" class="form-control" id="updateDescription"
+                 required>
+          <label for="inputGroupSelect01">Category</label>
+          <select [(ngModel)]="editBlog.categoryId" name="categoryId" class="form-select form-control"
+                  id="inputGroupSelect01"><br>
+            @for (item of categories; track item.id) {
+              <option value="{{item.id}}">{{ item.name }}</option>
+            }
+          </select>
+          @if (errors.length) {
+            @for (err of errors; track errors) {
+              <span class="text-danger">{{ err.errorMessage }}</span>
+            }
+          }
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-success" [disabled]="updateForm.invalid">Update</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -10,3 +10,4 @@ export class BlogResponseDTO extends BaseDTO {
   category?: CategoryResponseDTO;
   userId?: string;
 }
+
