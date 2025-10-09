@@ -18,6 +18,11 @@
         </li>
       </ul>
     </div>
+    @if (loggedIn()) {
+      <div class="d-flex ps-2">
+        <strong>{{ getFullName() }}</strong>
+      </div>
+    }
   </div>
 </nav>
 <router-outlet/>

@@ -2,20 +2,21 @@
   <div id="formContent">
 
     <div class="fadeIn first">
+      <!--suppress HtmlUnknownTarget -->
       <img src="Samples/profile.svg" id="icon" alt="User Icon"/>
     </div>
 
     <form #loginForm="ngForm" (ngSubmit)="login(); loginForm.resetForm()">
       <input [(ngModel)]="loginDto.usernameoremail" type="text" id="login" class="fadeIn second" name="emailOrUsername"
-             placeholder="Username Or Email" autocomplete="">
-      @for (error of errors; track error.id) {
+             placeholder="Username Or Email" autocomplete="UserName">
+      @for (error of errors; track $index) {
         @if (error.propertyName === "UsernameOrEmail") {
           <span class="text-danger d-block">{{ error.errorMessage }}</span>
         }
       }
       <input [(ngModel)]="loginDto.password" type="password" id="password" class="fadeIn third" name="password"
-             placeholder="Password" autocomplete="">
-      @for (error of errors; track error.id) {
+             placeholder="Password" autocomplete="on">
+      @for (error of errors; track $index) {
         @if (error.propertyName === "Password") {
           <span class="text-danger d-block">{{ error.errorMessage }}</span>
         }

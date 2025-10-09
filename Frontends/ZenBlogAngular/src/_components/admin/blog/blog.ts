@@ -9,6 +9,7 @@ import {DatePipe} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {CategoryService} from '../../../_services/category-service';
 import {CategoryResponseDTO} from '../../../_models/Categories/CategoryResponseDTO';
+import {AuthService} from '../../../_services/auth-service';
 
 declare const alertify: any;
 
@@ -27,18 +28,20 @@ export class Blog implements AfterViewInit, OnInit {
   newBlog: BlogCreateDTO = new BlogCreateDTO();
   editBlog: BlogUpdateDTO = new BlogUpdateDTO();
   errors: any[] = [];
+  userId: string;
 
   @ViewChild('updateModal', {static: false}) updateModal!: ElementRef;
   @ViewChild('createModal', {static: false}) createModal!: ElementRef;
 
   private modalInstances: Map<ElementRef, Modal> = new Map();
 
-  constructor(private blogService: BlogService, private categoryService: CategoryService, private sweetalertService: SweetalertService) {
+  constructor(private blogService: BlogService, private categoryService: CategoryService, private sweetalertService: SweetalertService, private authService: AuthService) {
   }
 
   ngOnInit() {
     this.get()
     this.getCategories()
+    this.getUserId()
   }
 
   getCategories() {
@@ -50,6 +53,10 @@ export class Blog implements AfterViewInit, OnInit {
         }
       }
     });
+  }
+
+  getUserId() {
+    this.userId = (this.authService.decodeToken()).sub;
   }
 
   ngAfterViewInit(): void {
@@ -74,6 +81,7 @@ export class Blog implements AfterViewInit, OnInit {
   }
 
   create(form: any) {
+    this.newBlog.userId = this.userId;
     this.blogService.create(this.newBlog).subscribe({
       next: () => {
         this.errors = [];

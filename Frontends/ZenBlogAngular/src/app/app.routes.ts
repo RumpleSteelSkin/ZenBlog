@@ -5,6 +5,7 @@ import {AdminLayout} from '../_components/_layouts/admin-layout/admin-layout';
 import {Category} from '../_components/admin/category/category';
 import {Blog} from '../_components/admin/blog/blog';
 import {Login} from '../_components/main/login/login';
+import {AuthGuard} from '../_guards/auth-guard';
 
 export const routes: Routes = [
   //Main Routes
@@ -15,6 +16,11 @@ export const routes: Routes = [
   {
     path: 'admin',
     component: AdminLayout,
-    children: [{path: 'category', component: Category}, {path: 'blog', component: Blog},]
+    canActivate: [AuthGuard],
+    children:
+      [
+        {path: 'category', component: Category, canActivate: [AuthGuard]},
+        {path: 'blog', component: Blog, canActivate: [AuthGuard]},
+      ]
   },
 ];
