@@ -43,7 +43,14 @@ export class Category implements AfterViewInit {
   get() {
     this.categoryService.get().subscribe({
       next: res => this.categories = res.data,
-      error: err => alertify.error()
+      error: err => {
+        if (err.status === 400) {
+          this.errors = err.error.errors;
+        }
+        for (let i = 0; i < err.error.errors.length; i++) {
+          alertify.error(err.error.errors[i].errorMessage);
+        }
+      }
     });
   }
 
@@ -61,7 +68,9 @@ export class Category implements AfterViewInit {
         if (err.status === 400) {
           this.errors = err.error.errors;
         }
-        alertify.error();
+        for (let i = 0; i < err.error.errors.length; i++) {
+          alertify.error(err.error.errors[i].errorMessage);
+        }
       }
     });
   }
@@ -85,7 +94,9 @@ export class Category implements AfterViewInit {
         if (err.status === 400) {
           this.errors = err.error.errors;
         }
-        alertify.error();
+        for (let i = 0; i < err.error.errors.length; i++) {
+          alertify.error(err.error.errors[i].errorMessage);
+        }
       }
     });
   }
@@ -98,7 +109,14 @@ export class Category implements AfterViewInit {
           this.get();
           alertify.success("Category Deleted Successfully");
         },
-        error: () => alertify.error()
+        error: err => {
+          if (err.status === 400) {
+            this.errors = err.error.errors;
+          }
+          for (let i = 0; i < err.error.errors.length; i++) {
+            alertify.error(err.error.errors[i].errorMessage);
+          }
+        }
       });
     }
   }

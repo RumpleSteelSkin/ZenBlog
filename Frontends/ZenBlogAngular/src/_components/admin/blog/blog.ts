@@ -5,7 +5,7 @@ import {SweetalertService} from '../../../_services/sweetalert-service';
 import {BlogResponseDTO} from '../../../_models/Blogs/BlogResponseDTO';
 import {BlogCreateDTO} from '../../../_models/Blogs/BlogCreateDTO';
 import {BlogUpdateDTO} from '../../../_models/Blogs/BlogUpdateDTO';
-import {DatePipe, NgOptimizedImage} from '@angular/common';
+import {DatePipe} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {CategoryService} from '../../../_services/category-service';
 import {CategoryResponseDTO} from '../../../_models/Categories/CategoryResponseDTO';
@@ -16,8 +16,7 @@ declare const alertify: any;
   selector: 'app-blog',
   imports: [
     DatePipe,
-    FormsModule,
-    NgOptimizedImage
+    FormsModule
   ],
   templateUrl: './blog.html',
   styleUrl: './blog.css'
@@ -45,7 +44,11 @@ export class Blog implements AfterViewInit, OnInit {
   getCategories() {
     this.categoryService.get().subscribe({
       next: res => this.categories = res.data,
-      error: err => alertify.error()
+      error: err => {
+        for (let i = 0; i < err.error.errors.length; i++) {
+          alertify.error(err.error.errors[i].errorMessage);
+        }
+      }
     });
   }
 
@@ -59,9 +62,14 @@ export class Blog implements AfterViewInit, OnInit {
   }
 
   get() {
+    this.errors = [];
     this.blogService.get().subscribe({
       next: res => this.blogs = res.data,
-      error: () => alertify.error()
+      error: err => {
+        for (let i = 0; i < err.error.errors.length; i++) {
+          alertify.error(err.error.errors[i].errorMessage);
+        }
+      }
     });
   }
 
@@ -79,7 +87,9 @@ export class Blog implements AfterViewInit, OnInit {
         if (err.status === 400) {
           this.errors = err.error.errors;
         }
-        alertify.error();
+        for (let i = 0; i < err.error.errors.length; i++) {
+          alertify.error(err.error.errors[i].errorMessage);
+        }
       }
     });
   }
@@ -103,7 +113,9 @@ export class Blog implements AfterViewInit, OnInit {
         if (err.status === 400) {
           this.errors = err.error.errors;
         }
-        alertify.error();
+        for (let i = 0; i < err.error.errors.length; i++) {
+          alertify.error(err.error.errors[i].errorMessage);
+        }
       }
     });
   }
@@ -116,11 +128,14 @@ export class Blog implements AfterViewInit, OnInit {
           this.get();
           alertify.success("Blog Deleted Successfully");
         },
-        error: () => alertify.error()
+        error: err => {
+          for (let i = 0; i < err.error.errors.length; i++) {
+            alertify.error(err.error.errors[i].errorMessage);
+          }
+        }
       });
     }
   }
-
 
   private forceCleanup() {
     document.body.classList.remove('modal-open');
