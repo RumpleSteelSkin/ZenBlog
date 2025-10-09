@@ -1,0 +1,26 @@
+<div class="wrapper fadeInDown" style="margin-top: 20vh">
+  <div id="formContent">
+
+    <div class="fadeIn first">
+      <img src="Samples/profile.svg" id="icon" alt="User Icon"/>
+    </div>
+
+    <form #loginForm="ngForm" (ngSubmit)="login(); loginForm.resetForm()">
+      <input [(ngModel)]="loginDto.usernameoremail" type="text" id="login" class="fadeIn second" name="emailOrUsername"
+             placeholder="Username Or Email" autocomplete="">
+      @for (error of errors; track error.id) {
+        @if (error.propertyName === "UsernameOrEmail") {
+          <span class="text-danger d-block">{{ error.errorMessage }}</span>
+        }
+      }
+      <input [(ngModel)]="loginDto.password" type="password" id="password" class="fadeIn third" name="password"
+             placeholder="Password" autocomplete="">
+      @for (error of errors; track error.id) {
+        @if (error.propertyName === "Password") {
+          <span class="text-danger d-block">{{ error.errorMessage }}</span>
+        }
+      }
+      <input type="submit" class="fadeIn fourth mt-4" value="Log In" [disabled]="loginForm.invalid">
+    </form>
+  </div>
+</div>
