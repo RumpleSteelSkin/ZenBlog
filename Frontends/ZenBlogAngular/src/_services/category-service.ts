@@ -4,6 +4,8 @@ import {CategoryResponseDTO} from '../_models/Categories/CategoryResponseDTO';
 import {CategoryCreateDTO} from '../_models/Categories/CategoryCreateDTO';
 import {CategoryUpdateDTO} from '../_models/Categories/CategoryUpdateDTO';
 import {BaseService} from './base-service';
+import {CategoryWithBlogsResponseDTO} from '../_models/Categories/CategoryWithBlogsResponseDTO';
+import {ResultDTO} from '../_models/Base/ResultDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -14,5 +16,9 @@ export class CategoryService extends BaseService<CategoryResponseDTO, CategoryCr
 
   constructor(http: HttpClient) {
     super(http);
+  }
+
+  getCategoriesWithBlogs() {
+    return this.http.get<ResultDTO<CategoryWithBlogsResponseDTO[]>>(`${this.baseUrl}/WithBlogs`);
   }
 }

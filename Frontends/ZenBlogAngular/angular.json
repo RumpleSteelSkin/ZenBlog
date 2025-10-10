@@ -29,11 +29,16 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/bootstrap-icons/font/bootstrap-icons.css",
               "node_modules/alertifyjs/build/css/alertify.min.css",
+              "node_modules/swiper/swiper-bundle.min.css",
+              "src/assets/vendor/aos/aos.css",
+              "src/assets/vendor/swiper/swiper-bundle.min.css",
               "node_modules/sweetalert2/dist/sweetalert2.css"
             ],
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
               "node_modules/alertifyjs/build/alertify.min.js",
+              "src/assets/vendor/aos/aos.js",
+              "src/assets/vendor/swiper/swiper-bundle.min.js",
               "node_modules/sweetalert2/dist/sweetalert2.js"
             ]
           },

@@ -1,6 +1,11 @@
-import {Component} from '@angular/core';
+// noinspection DuplicatedCode
+
+import {AfterViewInit, Component, HostListener} from '@angular/core';
 import {RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 import {AuthService} from '../../../_services/auth-service';
+import {Autoplay, Navigation, Pagination} from 'swiper/modules';
+import Swiper from 'swiper';
+import AOS from 'aos';
 
 @Component({
   selector: 'main-layout',
@@ -12,8 +17,72 @@ import {AuthService} from '../../../_services/auth-service';
   templateUrl: './main-layout.html',
   styleUrl: './main-layout.css'
 })
-export class MainLayout {
+export class MainLayout implements AfterViewInit {
+
   constructor(private authService: AuthService) {
+  }
+
+  private swiper: Swiper | undefined;
+  isMobileMenuOpen = false;
+
+
+  ngAfterViewInit() {
+    AOS.init({
+      duration: 1000,
+      easing: 'ease-in-out',
+      once: true,
+      mirror: false
+    });
+
+    this.swiper = new Swiper('.init-swiper', {
+      modules: [Navigation, Pagination, Autoplay],
+      loop: false,
+      speed: 600,
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false
+      },
+      slidesPerView: 'auto',
+      centeredSlides: true,
+      pagination: {
+        el: '.swiper-pagination',
+        type: 'bullets',
+        clickable: true
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev'
+      }
+    });
+
+
+    const preloader = document.querySelector('#preloader');
+    if (preloader) {
+      preloader.remove();
+    }
+  }
+
+  toggleMobileMenu() {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen;
+    const navmenu = document.querySelector('#navmenu');
+    if (navmenu) {
+      if (this.isMobileMenuOpen) {
+        navmenu.classList.add('mobile-nav-active');
+      } else {
+        navmenu.classList.remove('mobile-nav-active');
+      }
+    }
+  }
+
+  isScrolled = false;
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    this.isScrolled = window.scrollY > 100;
+  }
+
+  scrollToTop(event: Event) {
+    event.preventDefault();
+    window.scrollTo({top: 0, behavior: 'smooth'});
   }
 
   getFullName() {

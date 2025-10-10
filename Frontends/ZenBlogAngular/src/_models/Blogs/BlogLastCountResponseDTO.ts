@@ -1,7 +1,7 @@
-import {BaseDTO} from '../Base/BaseDTO';
+import {BaseDTO} from "../Base/BaseDTO";
 import {CategoryResponseDTO} from '../Categories/CategoryResponseDTO';
 
-export class BlogResponseDTO extends BaseDTO {
+export class BlogLastCountResponseDTO extends BaseDTO {
   title?: string;
   coverImage?: string;
   blogImage?: string;
@@ -11,4 +11,3 @@ export class BlogResponseDTO extends BaseDTO {
   userId?: string;
   user?: any;
 }
-

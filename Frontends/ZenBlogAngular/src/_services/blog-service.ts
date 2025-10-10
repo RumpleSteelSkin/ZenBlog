@@ -4,6 +4,8 @@ import {BlogResponseDTO} from '../_models/Blogs/BlogResponseDTO';
 import {BlogCreateDTO} from '../_models/Blogs/BlogCreateDTO';
 import {BlogUpdateDTO} from '../_models/Blogs/BlogUpdateDTO';
 import {BaseService} from './base-service';
+import {BlogLastCountResponseDTO} from '../_models/Blogs/BlogLastCountResponseDTO';
+import {ResultDTO} from '../_models/Base/ResultDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -14,4 +16,9 @@ export class BlogService extends BaseService<BlogResponseDTO, BlogCreateDTO, Blo
   constructor(http: HttpClient) {
     super(http);
   }
+
+  getLastCountBlogs() {
+    return this.http.get<ResultDTO<BlogLastCountResponseDTO[]>>(`${this.baseUrl}/5`);
+  }
+
 }
