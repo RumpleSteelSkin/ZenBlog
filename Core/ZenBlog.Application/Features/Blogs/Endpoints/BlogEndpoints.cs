@@ -8,6 +8,7 @@ using ZenBlog.Application.Features.Blogs.Commands.Update;
 using ZenBlog.Application.Features.Blogs.Queries.GetAllBlogs;
 using ZenBlog.Application.Features.Blogs.Queries.GetAllBlogsByCategoryId;
 using ZenBlog.Application.Features.Blogs.Queries.GetBlogById;
+using ZenBlog.Application.Features.Blogs.Queries.GetLastBlogsByCount;
 
 namespace ZenBlog.Application.Features.Blogs.Endpoints;
 
@@ -32,6 +33,12 @@ public static class BlogEndpoints
         blogs.MapGet("{id:guid}", async (IMediator mediator, Guid id) =>
         {
             var response = await mediator.Send(new GetBlogByIdQuery(id));
+            return response.IsSuccess ? Results.Ok(response) : Results.BadRequest(response);
+        });
+
+        blogs.MapGet("{count:int}", async (IMediator mediator, int count) =>
+        {
+            var response = await mediator.Send(new GetLastBlogsByCountQuery(count));
             return response.IsSuccess ? Results.Ok(response) : Results.BadRequest(response);
         });
 

@@ -4,6 +4,7 @@ using ZenBlog.Application.Features.Blogs.Commands.Update;
 using ZenBlog.Application.Features.Blogs.Queries.GetAllBlogs;
 using ZenBlog.Application.Features.Blogs.Queries.GetAllBlogsByCategoryId;
 using ZenBlog.Application.Features.Blogs.Queries.GetBlogById;
+using ZenBlog.Application.Features.Blogs.Queries.GetLastBlogsByCount;
 using ZenBlog.Application.Features.DTOs;
 using ZenBlog.Domain.Entities;
 
@@ -17,7 +18,8 @@ public class BlogMapping : Profile
         CreateMap<Blog, GetAllBlogsQueryResponseDto>();
         CreateMap<Blog, GetBlogByIdQueryResponseDto>();
         CreateMap<Blog, GetAllBlogsByCategoryIdQueryResponseDto>();
-        
+        CreateMap<Blog, GetLastBlogsByCountQueryResponseDto>();
+
 
         CreateMap<CreateBlogCommand, Blog>();
         CreateMap<UpdateBlogCommand, Blog>();
