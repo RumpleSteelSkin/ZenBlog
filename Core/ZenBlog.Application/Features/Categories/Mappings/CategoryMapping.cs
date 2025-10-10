@@ -2,6 +2,7 @@ using AutoMapper;
 using ZenBlog.Application.Features.Categories.Commands.Create;
 using ZenBlog.Application.Features.Categories.Commands.Update;
 using ZenBlog.Application.Features.Categories.Queries.GetAllCategories;
+using ZenBlog.Application.Features.Categories.Queries.GetAllCategoriesWithBlogs;
 using ZenBlog.Application.Features.Categories.Queries.GetCategoryById;
 using ZenBlog.Domain.Entities;
 
@@ -13,6 +14,7 @@ public class CategoryMapping : Profile
     {
         CreateMap<Category, GetAllCategoriesQueryResponseDto>();
         CreateMap<Category, GetCategoryByIdQueryResponseDto>();
+        CreateMap<Category, GetAllCategoriesWithBlogsQueryResponseDto>();
 
         CreateMap<CreateCategoryCommand, Category>();
         CreateMap<UpdateCategoryCommand, Category>();

@@ -6,6 +6,7 @@ using ZenBlog.Application.Features.Categories.Commands.Create;
 using ZenBlog.Application.Features.Categories.Commands.Remove;
 using ZenBlog.Application.Features.Categories.Commands.Update;
 using ZenBlog.Application.Features.Categories.Queries.GetAllCategories;
+using ZenBlog.Application.Features.Categories.Queries.GetAllCategoriesWithBlogs;
 using ZenBlog.Application.Features.Categories.Queries.GetCategoryById;
 
 namespace ZenBlog.Application.Features.Categories.Endpoints;
@@ -19,6 +20,12 @@ public static class CategoryEndpoints
         categories.MapGet(string.Empty, async (IMediator mediator) =>
         {
             var response = await mediator.Send(new GetAllCategoriesQuery());
+            return response.IsSuccess ? Results.Ok(response) : Results.BadRequest(response);
+        });
+
+        categories.MapGet("WithBlogs", async (IMediator mediator) =>
+        {
+            var response = await mediator.Send(new GetAllCategoriesWithBlogsQuery());
             return response.IsSuccess ? Results.Ok(response) : Results.BadRequest(response);
         });
 

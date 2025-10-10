@@ -19,7 +19,9 @@ public static class AppRegistrations
         app.UseHttpsRedirection();
         app.UseAuthentication();
         app.UseAuthorization();
-        app.MapGroup("/api").RequireAuthorization().RegisterEndpoints();
+        app.MapGroup("/api")
+            // .RequireAuthorization()
+            .RegisterEndpoints();
         app.Run();
     }
 }

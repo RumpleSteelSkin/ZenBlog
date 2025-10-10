@@ -17,8 +17,4 @@
         <ProjectReference Include="..\ZenBlog.Domain\ZenBlog.Domain.csproj"/>
     </ItemGroup>
 
-    <ItemGroup>
-        <Folder Include="Features\Users\Commands\Login\" />
-    </ItemGroup>
-
 </Project>
