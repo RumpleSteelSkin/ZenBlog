@@ -6,12 +6,13 @@ import {CategoryUpdateDTO} from '../_models/Categories/CategoryUpdateDTO';
 import {BaseService} from './base-service';
 import {CategoryWithBlogsResponseDTO} from '../_models/Categories/CategoryWithBlogsResponseDTO';
 import {ResultDTO} from '../_models/Base/ResultDTO';
+import {CategoryResponseByIdDTO} from '../_models/Categories/CategoryResponseByIdDTO';
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class CategoryService extends BaseService<CategoryResponseDTO, CategoryCreateDTO, CategoryUpdateDTO> {
+export class CategoryService extends BaseService<CategoryResponseDTO, CategoryCreateDTO, CategoryUpdateDTO, CategoryResponseByIdDTO> {
   protected baseUrl = "https://localhost:7000/api/categories";
 
   constructor(http: HttpClient) {

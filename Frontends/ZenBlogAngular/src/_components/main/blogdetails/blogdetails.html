@@ -1,0 +1,155 @@
+<div class="container py-4">
+  <div class="row g-4">
+
+    <!-- Main Content -->
+    <div class="col-lg-8">
+
+      <!-- Blog Details Section -->
+      <section id="blog-details" class="blog-details mb-5">
+        <article class="article">
+
+          <div class="post-img mb-3">
+            <img [src]="blog.coverImage" alt="{{ blog.title }}" class="img-fluid rounded">
+          </div>
+
+          <h2 class="h3 fw-bold">{{ blog.title }}</h2>
+
+          <div class="meta-top mb-3">
+            <ul class="list-unstyled d-flex flex-wrap gap-3 small text-muted mb-0">
+              <li class="d-flex align-items-center">
+                <i class="bi bi-person me-1"></i>
+                <a href="#" class="text-decoration-none">{{ blog.user.firstName }} {{ blog.user.lastName }}</a>
+              </li>
+              <li class="d-flex align-items-center">
+                <i class="bi bi-clock me-1"></i>
+                <time>{{ blog.createdAt | date }}</time>
+              </li>
+              <li class="d-flex align-items-center">
+                <i class="bi bi-chat-dots me-1"></i> 2 Comments
+              </li>
+            </ul>
+          </div>
+
+          <div class="content mb-4">
+            <img [src]="blog.blogImage" class="img-fluid rounded mb-3" alt="">
+            <p>{{ blog.description }}</p>
+          </div>
+
+          <div class="meta-bottom border-top pt-3 mt-3 small text-muted">
+            <div class="d-flex flex-wrap align-items-center gap-2">
+              <i class="bi bi-folder"></i>
+              <a href="#" class="text-decoration-none">{{ blog.category.name }}</a>
+            </div>
+
+            <div class="d-flex flex-wrap align-items-center gap-2 mt-2">
+              <i class="bi bi-tags"></i>
+              <ul class="list-inline mb-0">
+                <li class="list-inline-item"><a href="#">Creative</a></li>
+                <li class="list-inline-item"><a href="#">Tips</a></li>
+                <li class="list-inline-item"><a href="#">Marketing</a></li>
+              </ul>
+            </div>
+          </div>
+
+        </article>
+      </section>
+
+      <!-- Blog Comments Section -->
+      <section id="blog-comments" class="blog-comments mb-5">
+        <h4 class="fw-bold mb-4">{{ blog.comments.length }} Comments</h4>
+
+        @for (item of blog.comments; track $index) {
+          <div class="comment mb-4 border-bottom pb-3">
+            <div class="d-flex gap-3">
+              <div class="comment-img flex-shrink-0">
+                <img src="/img/blog/comments-1.jpg" alt="" class="rounded-circle" width="60" height="60">
+              </div>
+              <div>
+                <h6 class="mb-1">
+                  <a href="#" class="text-decoration-none">{{ item.firstname }} {{ item.lastname }}</a>
+                  <a href="#" class="reply small text-primary ms-2">
+                    <i class="bi bi-reply-fill"></i> Reply
+                  </a>
+                </h6>
+                <time class="small text-muted d-block mb-2">{{ item.createdAt | date }}</time>
+                <p class="mb-0">{{ item.body }}</p>
+              </div>
+            </div>
+          </div>
+        }
+      </section>
+
+    </div>
+
+    <!-- Sidebar -->
+    <aside class="col-lg-4">
+      <div class="widgets-container d-flex flex-column gap-4">
+
+        <!-- Blog Author Widget -->
+        <div class="blog-author-widget p-4 bg-light rounded shadow-sm">
+          <div class="d-flex flex-column align-items-center text-center">
+            <img src="/img/blog/blog-author.jpg" class="rounded-circle mb-3" width="100" height="100" alt="">
+            <h5 class="fw-bold mb-1">Jane Smith</h5>
+            <div class="social-links d-flex gap-3 mb-3">
+              <a href="https://x.com/#" class="text-muted"><i class="bi bi-twitter-x"></i></a>
+              <a href="https://facebook.com/#" class="text-muted"><i class="bi bi-facebook"></i></a>
+              <a href="https://instagram.com/#" class="text-muted"><i class="bi bi-instagram"></i></a>
+              <a href="https://linkedin.com/#" class="text-muted"><i class="bi bi-linkedin"></i></a>
+            </div>
+            <p class="small mb-0">
+              Itaque quidem optio quia voluptatibus dolorem dolor. Modi eum sed possimus accusantium. Quas repellat
+              voluptatem officia numquam sint aspernatur voluptas. Esse et accusantium ut unde voluptas.
+            </p>
+          </div>
+        </div>
+
+        <!-- Search Widget -->
+        <div class="search-widget p-4 bg-light rounded shadow-sm">
+          <h5 class="fw-bold mb-3">Search</h5>
+          <form class="d-flex">
+            <input type="text" class="form-control me-2" placeholder="Search...">
+            <button type="submit" class="btn btn-primary">
+              <i class="bi bi-search"></i>
+            </button>
+          </form>
+        </div>
+
+        <!-- Recent Posts Widget -->
+        <div class="recent-posts-widget p-4 bg-light rounded shadow-sm">
+          <h5 class="fw-bold mb-3">Recent Posts</h5>
+          <div class="d-flex flex-column gap-3">
+            @for (item of latestBlogs; track $index) {
+              <div class="d-flex gap-3 align-items-center">
+                <img [src]="item.coverImage" alt="" class="rounded flex-shrink-0" width="64" height="64">
+                <div>
+                  <h6 class="mb-1"><a href="#" class="text-decoration-none">{{ item.title }}</a></h6>
+                  <time class="small text-muted">{{ item.createdAt | date }}</time>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+
+        <!-- Tags Widget -->
+        <div class="tags-widget p-4 bg-light rounded shadow-sm">
+          <h5 class="fw-bold mb-3">Tags</h5>
+          <ul class="list-inline mb-0">
+            <li class="list-inline-item mb-2"><a href="#" class="btn btn-outline-secondary btn-sm">App</a></li>
+            <li class="list-inline-item mb-2"><a href="#" class="btn btn-outline-secondary btn-sm">IT</a></li>
+            <li class="list-inline-item mb-2"><a href="#" class="btn btn-outline-secondary btn-sm">Business</a></li>
+            <li class="list-inline-item mb-2"><a href="#" class="btn btn-outline-secondary btn-sm">Mac</a></li>
+            <li class="list-inline-item mb-2"><a href="#" class="btn btn-outline-secondary btn-sm">Design</a></li>
+            <li class="list-inline-item mb-2"><a href="#" class="btn btn-outline-secondary btn-sm">Office</a></li>
+            <li class="list-inline-item mb-2"><a href="#" class="btn btn-outline-secondary btn-sm">Creative</a></li>
+            <li class="list-inline-item mb-2"><a href="#" class="btn btn-outline-secondary btn-sm">Studio</a></li>
+            <li class="list-inline-item mb-2"><a href="#" class="btn btn-outline-secondary btn-sm">Smart</a></li>
+            <li class="list-inline-item mb-2"><a href="#" class="btn btn-outline-secondary btn-sm">Tips</a></li>
+            <li class="list-inline-item mb-2"><a href="#" class="btn btn-outline-secondary btn-sm">Marketing</a></li>
+          </ul>
+        </div>
+
+      </div>
+    </aside>
+
+  </div>
+</div>

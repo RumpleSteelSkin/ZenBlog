@@ -6,11 +6,12 @@ import {BlogUpdateDTO} from '../_models/Blogs/BlogUpdateDTO';
 import {BaseService} from './base-service';
 import {BlogLastCountResponseDTO} from '../_models/Blogs/BlogLastCountResponseDTO';
 import {ResultDTO} from '../_models/Base/ResultDTO';
+import {BlogResponseByIdDTO} from '../_models/Blogs/BlogResponseByIdDTO';
 
 @Injectable({
   providedIn: 'root'
 })
-export class BlogService extends BaseService<BlogResponseDTO, BlogCreateDTO, BlogUpdateDTO> {
+export class BlogService extends BaseService<BlogResponseDTO, BlogCreateDTO, BlogUpdateDTO, BlogResponseByIdDTO> {
   protected baseUrl = "https://localhost:7000/api/blogs";
 
   constructor(http: HttpClient) {

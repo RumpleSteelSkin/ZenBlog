@@ -6,10 +6,18 @@ import {Category} from '../_components/admin/category/category';
 import {Blog} from '../_components/admin/blog/blog';
 import {Login} from '../_components/main/login/login';
 import {AuthGuard} from '../_guards/auth-guard';
+import {Blogdetails} from '../_components/main/blogdetails/blogdetails';
 
 export const routes: Routes = [
   //Main Routes
-  {path: '', component: MainLayout, children: [{path: '', component: Home}, {path: 'login', component: Login}]},
+  {
+    path: '', component: MainLayout, children:
+      [
+        {path: '', component: Home},
+        {path: 'login', component: Login},
+        {path: 'blogdetails/:id', component: Blogdetails},
+      ]
+  },
 
 
   //Admin Routes

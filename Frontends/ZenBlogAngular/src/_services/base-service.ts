@@ -2,7 +2,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {ResultDTO} from '../_models/Base/ResultDTO';
 
-export abstract class BaseService<TResponse, TCreate, TUpdate> {
+export abstract class BaseService<TResponse, TCreate, TUpdate, TResponseById> {
   protected abstract baseUrl: string;
 
   protected constructor(protected http: HttpClient) {
@@ -10,6 +10,10 @@ export abstract class BaseService<TResponse, TCreate, TUpdate> {
 
   get(): Observable<ResultDTO<TResponse[]>> {
     return this.http.get<ResultDTO<TResponse[]>>(this.baseUrl);
+  }
+
+  getById(id: string): Observable<ResultDTO<TResponseById>> {
+    return this.http.get<ResultDTO<TResponseById>>(`${this.baseUrl}/${id}`);
   }
 
   create(dto: TCreate): Observable<ResultDTO<TResponse>> {
