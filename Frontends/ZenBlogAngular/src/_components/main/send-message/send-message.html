@@ -1,0 +1,50 @@
+<div class="col-lg-8">
+  <form #sendMessageForm="ngForm" (ngSubmit)="sendMessage()" class="php-email-form" data-aos="fade-up"
+        data-aos-delay="200">
+    <div class="row g-4">
+
+      <!-- Name -->
+      <div class="col-md-6">
+        <div class="form-floating">
+          <input type="text" name="name" [(ngModel)]="newMessage.name" class="form-control" id="name"
+                 placeholder="Your Name" required>
+          <label for="name">Your Name</label>
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="col-md-6">
+        <div class="form-floating">
+          <input type="email" name="email" [(ngModel)]="newMessage.email" class="form-control" id="email"
+                 placeholder="Your Email" required>
+          <label for="email">Your Email</label>
+        </div>
+      </div>
+
+      <!-- Subject -->
+      <div class="col-12">
+        <div class="form-floating">
+          <input type="text" name="subject" [(ngModel)]="newMessage.subject" class="form-control" id="subject"
+                 placeholder="Subject" required>
+          <label for="subject">Subject</label>
+        </div>
+      </div>
+
+      <!-- Message -->
+      <div class="col-12">
+        <div class="form-floating">
+          <textarea name="messageBody" [(ngModel)]="newMessage.messageBody" class="form-control" id="messageBody"
+                    placeholder="Message" style="height: 150px;" required></textarea>
+          <label for="messageBody">Message</label>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="col-12 text-center">
+        <!--        <div class="mb-2 text-muted" *ngIf="loading">Loading...</div>-->
+        <button type="submit" class="btn btn-primary btn-lg">Send Message</button>
+      </div>
+
+    </div>
+  </form>
+</div>

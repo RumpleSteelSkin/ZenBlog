@@ -1,0 +1,78 @@
+<!-- Page Title -->
+<div class="page-title py-4 bg-light">
+  <div class="container d-lg-flex justify-content-between align-items-center">
+    <h1 class="mb-2 mb-lg-0">Contact</h1>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb mb-0">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Contact</li>
+      </ol>
+    </nav>
+  </div>
+</div>
+<!-- End Page Title -->
+
+<!-- Contact Section -->
+<section id="contact" class="contact section py-5">
+  <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+    <!-- Google Maps -->
+    @for (item of contactInfos; track $index) {
+      @if (item.safeUrl) {
+        <div class="mb-4" data-aos="fade-up" data-aos-delay="200">
+          <div class="ratio ratio-16x9">
+            <iframe
+              [src]="item.safeUrl"
+              style="border:0;"
+              allowfullscreen
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+        </div>
+      }
+    }
+    <!-- End Google Maps -->
+
+    <div class="row gy-4">
+      @for (item of contactInfos; track $index) {
+        <div class="col-lg-4 col-md-6">
+          <div class="info-item d-flex align-items-start p-3 border rounded shadow-sm" data-aos="fade-up"
+               data-aos-delay="300">
+            <i class="bi bi-geo-alt fs-3 flex-shrink-0 me-3"></i>
+            <div>
+              <h5>Address</h5>
+              <p class="mb-0">{{ item.address }}</p>
+            </div>
+          </div>
+
+          <div class="info-item d-flex align-items-start p-3 border rounded shadow-sm mt-3" data-aos="fade-up"
+               data-aos-delay="400">
+            <i class="bi bi-telephone fs-3 flex-shrink-0 me-3"></i>
+            <div>
+              <h5>Call Us</h5>
+              <p class="mb-0">{{ item.phone }}</p>
+            </div>
+          </div>
+
+          <div class="info-item d-flex align-items-start p-3 border rounded shadow-sm mt-3" data-aos="fade-up"
+               data-aos-delay="500">
+            <i class="bi bi-envelope fs-3 flex-shrink-0 me-3"></i>
+            <div>
+              <h5>Email Us</h5>
+              <p class="mb-0">{{ item.email }}</p>
+            </div>
+          </div>
+        </div>
+      }
+
+      <!-- Contact Form Component -->
+      <div class="col-lg-8 col-md-12">
+        <send-message></send-message>
+      </div>
+      <!-- End Contact Form -->
+    </div>
+
+  </div>
+</section>
+<!-- /Contact Section -->

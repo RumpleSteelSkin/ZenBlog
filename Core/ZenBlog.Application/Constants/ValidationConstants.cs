@@ -2,7 +2,7 @@ namespace ZenBlog.Application.Constants;
 
 public static class ValidationConstants
 {
-    public const string NormalCharacters = @"^[a-zA-ZğüşöçıİĞÜŞÖÇ]+$";
+    public const string NormalCharacters = @"^[a-zA-ZğüşöçıİĞÜŞÖÇ ]+$";
 
     public const string PhoneNumber = @"^[\d\s\+\-()]+$";
 

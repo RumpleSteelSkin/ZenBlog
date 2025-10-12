@@ -7,6 +7,8 @@ import {Blog} from '../_components/admin/blog/blog';
 import {Login} from '../_components/main/login/login';
 import {AuthGuard} from '../_guards/auth-guard';
 import {Blogdetails} from '../_components/main/blogdetails/blogdetails';
+import {ContactMain} from '../_components/main/contact-main/contact-main';
+
 
 export const routes: Routes = [
   //Main Routes
@@ -16,6 +18,7 @@ export const routes: Routes = [
         {path: '', component: Home},
         {path: 'login', component: Login},
         {path: 'blogdetails/:id', component: Blogdetails},
+        {path: 'contact', component: ContactMain},
       ]
   },
 

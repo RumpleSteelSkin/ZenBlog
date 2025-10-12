@@ -8,7 +8,7 @@ import {BlogResponseByIdDTO} from '../../../_models/Blogs/BlogResponseByIdDTO';
 import {CommentForm} from '../comment-form/comment-form';
 
 @Component({
-  selector: 'app-blogdetails',
+  selector: 'blogdetails',
   templateUrl: './blogdetails.html',
   imports: [
     DatePipe,
