@@ -5,12 +5,14 @@ import {CommentCreateDTO} from '../../../_models/Comments/CommentCreateDTO';
 import {BlogService} from '../../../_services/blog-service';
 import {DatePipe} from '@angular/common';
 import {BlogResponseByIdDTO} from '../../../_models/Blogs/BlogResponseByIdDTO';
+import {CommentForm} from '../comment-form/comment-form';
 
 @Component({
   selector: 'app-blogdetails',
   templateUrl: './blogdetails.html',
   imports: [
-    DatePipe
+    DatePipe,
+    CommentForm
   ],
   styleUrl: './blogdetails.css'
 })

@@ -10,7 +10,7 @@ import {CommentResponseByIdDTO} from '../_models/Comments/CommentResponseByIdDTO
   providedIn: 'root'
 })
 export class CommentService extends BaseService<CommentResponseDTO, CommentCreateDTO, CommentUpdateDTO, CommentResponseByIdDTO> {
-  protected baseUrl = "http://localhost:7000/api/comments";
+  protected baseUrl = "https://localhost:7000/api/comments";
 
   constructor(http: HttpClient) {
     super(http);

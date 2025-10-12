@@ -1,5 +1,6 @@
 using ZenBlog.Application.Base;
 using ZenBlog.Application.Features.DTOs;
+using ZenBlog.Domain.Entities;
 
 namespace ZenBlog.Application.Features.Blogs.Queries.GetBlogById;
 
@@ -13,4 +14,6 @@ public class GetBlogByIdQueryResponseDto : BaseDto
     public Guid CategoryId { get; set; }
     public CategoryDto? Category { get; set; }
     public string? UserId { get; set; }
+    public AppUser? User { get; set; }
+    public ICollection<Comment>? Comments { get; set; }
 }
