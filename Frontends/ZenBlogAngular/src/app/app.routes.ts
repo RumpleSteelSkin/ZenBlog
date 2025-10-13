@@ -9,6 +9,7 @@ import {AuthGuard} from '../_guards/auth-guard';
 import {Blogdetails} from '../_components/main/blogdetails/blogdetails';
 import {ContactMain} from '../_components/main/contact-main/contact-main';
 import {Comment} from '../_components/admin/comment/comment';
+import {ContactInfo} from '../_components/admin/contact-info/contact-info';
 
 
 export const routes: Routes = [
@@ -34,6 +35,7 @@ export const routes: Routes = [
         {path: 'category', component: Category, canActivate: [AuthGuard]},
         {path: 'blog', component: Blog, canActivate: [AuthGuard]},
         {path: 'comment', component: Comment, canActivate: [AuthGuard]},
+        {path: 'contactinfo', component: ContactInfo, canActivate: [AuthGuard]},
       ]
   },
 ];

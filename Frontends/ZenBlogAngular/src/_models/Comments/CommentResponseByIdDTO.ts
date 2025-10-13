@@ -1,4 +1,5 @@
 import {BaseDTO} from "../Base/BaseDTO";
+import {SubCommentResponseDTO} from '../SubComments/SubCommentResponseDTO';
 
 export class CommentResponseByIdDTO extends BaseDTO {
   firstName: string;
@@ -6,4 +7,5 @@ export class CommentResponseByIdDTO extends BaseDTO {
   email: string;
   body: string;
   blogId: string;
+  subComments: SubCommentResponseDTO[];
 }
