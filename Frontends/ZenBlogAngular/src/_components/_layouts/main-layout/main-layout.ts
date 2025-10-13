@@ -6,6 +6,8 @@ import {AuthService} from '../../../_services/auth-service';
 import {Autoplay, Navigation, Pagination} from 'swiper/modules';
 import Swiper from 'swiper';
 import AOS from 'aos';
+import {SocialService} from '../../../_services/social-service';
+import {SocialResponseDTO} from '../../../_models/Socials/SocialResponseDTO';
 
 @Component({
   selector: 'main-layout',
@@ -19,12 +21,19 @@ import AOS from 'aos';
 })
 export class MainLayout implements AfterViewInit {
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private socialService: SocialService) {
+    this.getSocials()
   }
 
   private swiper: Swiper | undefined;
   isMobileMenuOpen = false;
+  socials: SocialResponseDTO[];
 
+  getSocials() {
+    this.socialService.get().subscribe({
+      next: result => this.socials = result.data
+    })
+  }
 
   ngAfterViewInit() {
     AOS.init({
@@ -75,6 +84,7 @@ export class MainLayout implements AfterViewInit {
   }
 
   isScrolled = false;
+
   @HostListener('window:scroll', [])
   onWindowScroll() {
     this.isScrolled = window.scrollY > 100;

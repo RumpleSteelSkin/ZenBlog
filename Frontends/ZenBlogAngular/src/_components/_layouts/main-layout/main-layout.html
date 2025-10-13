@@ -30,10 +30,10 @@
 
         <!-- Social Links -->
         <ul class="navbar-nav ms-lg-3 flex-row gap-2">
-          <li class="nav-item"><a href="#" class="nav-link p-0 text-body"><i class="bi bi-twitter-x"></i></a></li>
-          <li class="nav-item"><a href="#" class="nav-link p-0 text-body"><i class="bi bi-facebook"></i></a></li>
-          <li class="nav-item"><a href="#" class="nav-link p-0 text-body"><i class="bi bi-instagram"></i></a></li>
-          <li class="nav-item"><a href="#" class="nav-link p-0 text-body"><i class="bi bi-linkedin"></i></a></li>
+          @for (item of socials; track item.id) {
+            <li class="nav-item"><a href="{{item.url}}" class="nav-link p-0 text-body" target="_blank"><i class="{{item.icon}}"></i></a>
+            </li>
+          }
         </ul>
       </div>
     </div>
