@@ -1,7 +1,7 @@
 export class CommentUpdateDTO {
   id: string;
-  firstname: string;
-  lastname: string;
+  firstName: string;
+  lastName: string;
   email: string;
   body: string;
   blogId: string;

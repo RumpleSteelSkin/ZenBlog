@@ -8,6 +8,7 @@ import {Login} from '../_components/main/login/login';
 import {AuthGuard} from '../_guards/auth-guard';
 import {Blogdetails} from '../_components/main/blogdetails/blogdetails';
 import {ContactMain} from '../_components/main/contact-main/contact-main';
+import {Comment} from '../_components/admin/comment/comment';
 
 
 export const routes: Routes = [
@@ -32,6 +33,7 @@ export const routes: Routes = [
       [
         {path: 'category', component: Category, canActivate: [AuthGuard]},
         {path: 'blog', component: Blog, canActivate: [AuthGuard]},
+        {path: 'comment', component: Comment, canActivate: [AuthGuard]},
       ]
   },
 ];
