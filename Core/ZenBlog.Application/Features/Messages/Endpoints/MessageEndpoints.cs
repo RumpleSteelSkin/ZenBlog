@@ -20,19 +20,19 @@ public static class MessageEndpoints
         {
             var response = await mediator.Send(command);
             return response.IsSuccess ? Results.Ok(response) : Results.BadRequest(response);
-        });
+        }).AllowAnonymous();
 
         messages.MapGet(string.Empty, async (IMediator mediator) =>
         {
             var response = await mediator.Send(new GetAllMessagesQuery());
             return response.IsSuccess ? Results.Ok(response) : Results.BadRequest(response);
-        });
+        }).AllowAnonymous();
 
         messages.MapGet("{id:guid}", async (IMediator mediator, Guid id) =>
         {
             var response = await mediator.Send(new GetMessageByIdQuery(id));
             return response.IsSuccess ? Results.Ok(response) : Results.BadRequest(response);
-        });
+        }).AllowAnonymous();
 
         messages.MapDelete("{id:guid}", async (IMediator mediator, Guid id) =>
         {

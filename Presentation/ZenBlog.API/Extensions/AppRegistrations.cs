@@ -20,7 +20,7 @@ public static class AppRegistrations
         app.UseAuthentication();
         app.UseAuthorization();
         app.MapGroup("/api")
-            // .RequireAuthorization()
+            .RequireAuthorization()
             .RegisterEndpoints();
         app.Run();
     }

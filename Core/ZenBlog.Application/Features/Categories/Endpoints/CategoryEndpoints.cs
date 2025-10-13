@@ -21,19 +21,19 @@ public static class CategoryEndpoints
         {
             var response = await mediator.Send(new GetAllCategoriesQuery());
             return response.IsSuccess ? Results.Ok(response) : Results.BadRequest(response);
-        });
+        }).AllowAnonymous();
 
         categories.MapGet("WithBlogs", async (IMediator mediator) =>
         {
             var response = await mediator.Send(new GetAllCategoriesWithBlogsQuery());
             return response.IsSuccess ? Results.Ok(response) : Results.BadRequest(response);
-        });
+        }).AllowAnonymous();
 
         categories.MapGet("{id:guid}", async (IMediator mediator, Guid id) =>
         {
             var response = await mediator.Send(new GetCategoryByIdQuery(id));
             return response.IsSuccess ? Results.Ok(response) : Results.BadRequest(response);
-        });
+        }).AllowAnonymous();
 
         categories.MapPost(string.Empty, async (IMediator mediator, CreateCategoryCommand createCategoryCommand) =>
         {

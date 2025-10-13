@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using ZenBlog.Application.Features.SubComments.Commands.Create;
+using ZenBlog.Application.Features.SubComments.Commands.Remove;
 using ZenBlog.Application.Features.SubComments.Commands.Update;
 using ZenBlog.Application.Features.SubComments.Queries.GetAllSubComments;
 using ZenBlog.Application.Features.SubComments.Queries.GetSubCommentById;
@@ -24,19 +25,25 @@ public static class SubCommentEndpoints
         {
             var response = await mediator.Send(new GetAllSubCommentsQuery());
             return response.IsSuccess ? Results.Ok(response) : Results.NotFound(response);
-        });
+        }).AllowAnonymous();
 
         subComments.MapGet("{id:guid}", async (IMediator mediator, Guid id) =>
         {
             var response = await mediator.Send(new GetSubCommentByIdQuery(id));
             return response.IsSuccess ? Results.Ok(response) : Results.NotFound(response);
-        });
+        }).AllowAnonymous();
 
         subComments.MapPut("{id:guid}", async (IMediator mediator, UpdateSubCommentCommand command, Guid id) =>
         {
             if (id != command.Id) return Results.BadRequest("ID mismatch between URL and body");
             var response = await mediator.Send(command);
             return response.IsSuccess ? Results.Ok(response) : Results.NotFound(response);
+        });
+        
+        subComments.MapDelete("{id:guid}", async (IMediator mediator, Guid id) =>
+        {
+            var response = await mediator.Send(new RemoveSubCommentCommand(id));
+            return response.IsSuccess ? Results.Ok(response) : Results.BadRequest(response);
         });
     }
 }

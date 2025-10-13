@@ -20,13 +20,13 @@ public static class ContactInfoEndpoints
         {
             var response = await mediator.Send(new GetAllContactInfosQuery());
             return response.IsSuccess ? Results.Ok(response) : Results.BadRequest(response);
-        });
+        }).AllowAnonymous();
 
         contactInfos.MapGet("{id:guid}", async (IMediator mediator, Guid id) =>
         {
             var response = await mediator.Send(new GetContactInfoByIdQuery(id));
             return response.IsSuccess ? Results.Ok(response) : Results.BadRequest(response);
-        });
+        }).AllowAnonymous();
 
         contactInfos.MapPost(string.Empty, async (IMediator mediator, CreateContactInfoCommand command) =>
         {

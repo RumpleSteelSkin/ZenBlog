@@ -26,13 +26,13 @@ public static class SocialEndpoints
         {
             var response = await mediator.Send(new GetAllSocialsQuery());
             return response.IsSuccess ? Results.Ok(response) : Results.BadRequest(response);
-        });
+        }).AllowAnonymous();
 
         socials.MapGet("{id:guid}", async (IMediator mediator, Guid id) =>
         {
             var response = await mediator.Send(new GetSocialByIdQuery(id));
             return response.IsSuccess ? Results.Ok(response) : Results.BadRequest(response);
-        });
+        }).AllowAnonymous();
 
         socials.MapDelete("{id:guid}", async (IMediator mediator, Guid id) =>
         {

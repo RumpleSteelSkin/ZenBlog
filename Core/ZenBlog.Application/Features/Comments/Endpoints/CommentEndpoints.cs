@@ -19,19 +19,19 @@ public static class CommentEndpoints
         {
             var response = await mediator.Send(new GetAllCommentsQuery());
             return response.IsSuccess ? Results.Ok(response) : Results.NotFound(response);
-        });
+        }).AllowAnonymous();
 
         comments.MapGet("{id:guid}", async (IMediator mediator, Guid id) =>
         {
             var response = await mediator.Send(new GetCommentByIdQuery(id));
             return response.IsSuccess ? Results.Ok(response) : Results.NotFound(response);
-        });
+        }).AllowAnonymous();
 
         comments.MapPost(string.Empty, async (IMediator mediator, CreateCommentCommand command) =>
         {
             var response = await mediator.Send(command);
             return response.IsSuccess ? Results.Ok(response) : Results.NotFound(response);
-        });
+        }).AllowAnonymous();
 
         comments.MapPut("{id:guid}", async (IMediator mediator, UpdateCommentCommand command, Guid id) =>
         {

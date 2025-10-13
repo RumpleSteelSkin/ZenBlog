@@ -22,7 +22,7 @@ public static class BlogEndpoints
         {
             var response = await mediator.Send(new GetAllBlogsQuery());
             return response.IsSuccess ? Results.Ok(response) : Results.BadRequest(response);
-        });
+        }).AllowAnonymous();
 
         blogs.MapPost(string.Empty, async (IMediator mediator, CreateBlogCommand createBlogCommand) =>
         {
@@ -34,19 +34,19 @@ public static class BlogEndpoints
         {
             var response = await mediator.Send(new GetBlogByIdQuery(id));
             return response.IsSuccess ? Results.Ok(response) : Results.BadRequest(response);
-        });
+        }).AllowAnonymous();
 
         blogs.MapGet("{count:int}", async (IMediator mediator, int count) =>
         {
             var response = await mediator.Send(new GetLastBlogsByCountQuery(count));
             return response.IsSuccess ? Results.Ok(response) : Results.BadRequest(response);
-        });
+        }).AllowAnonymous();
 
         blogs.MapGet("GetAllBlogsByCategoryId/{id:guid}", async (IMediator mediator, Guid id) =>
         {
             var response = await mediator.Send(new GetAllBlogsByCategoryIdQuery(id));
             return response.IsSuccess ? Results.Ok(response) : Results.BadRequest(response);
-        });
+        }).AllowAnonymous();
 
         blogs.MapPut("{id:guid}",
             async (IMediator mediator, Guid id, UpdateBlogCommand updateBlogCommand) =>
