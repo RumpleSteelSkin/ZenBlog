@@ -44,5 +44,15 @@ This project is a full-featured Blog Management System (CMS) developed using mod
 ## 👤 Contributors
 
 * RumpleSteelSkin - Developer
+---
+
+<img width="1897" height="1018" alt="Screenshot 2025-10-13 201017" src="https://github.com/user-attachments/assets/3eabc428-11c8-4693-adb1-c391b232dbdc" />
+<img width="1899" height="947" alt="Screenshot 2025-10-13 201125" src="https://github.com/user-attachments/assets/b34e8647-e50f-4038-b66b-f025662dcd0b" />
+<img width="912" height="916" alt="Screenshot 2025-10-13 201301" src="https://github.com/user-attachments/assets/08e70f84-9bc8-42f2-836b-31ba11062f3a" />
+<img width="1912" height="989" alt="Screenshot 2025-10-13 201330" src="https://github.com/user-attachments/assets/e48da949-d6ce-4c00-9e9b-fe2903951bf3" />
+<img width="1910" height="983" alt="Screenshot 2025-10-13 201409" src="https://github.com/user-attachments/assets/3b730c09-f568-4a36-b130-06398b1fc8bd" />
+<img width="1901" height="994" alt="Screenshot 2025-10-13 201455" src="https://github.com/user-attachments/assets/5d92c330-d65d-48a1-9ecd-6ce8375ffcf1" />
+<img width="1909" height="985" alt="Screenshot 2025-10-13 201658" src="https://github.com/user-attachments/assets/dbbabd1f-bd54-46ad-a44c-f358b5290189" />
+<img width="1910" height="1037" alt="Screenshot 2025-10-13 201930" src="https://github.com/user-attachments/assets/96cb8e50-78ba-4d85-9aa4-2585b5697f55" />
 
 ---
