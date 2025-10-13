@@ -10,7 +10,7 @@ import {HttpClient} from '@angular/common/http';
   providedIn: 'root'
 })
 export class SocialService extends BaseService<SocialResponseDTO, SocialCreateDTO, SocialUpdateDTO, SocialResponseByIdDTO> {
-  protected override baseUrl = "https://localhost:7000/socials";
+  protected override baseUrl = "https://localhost:7000/api/socials";
 
   constructor(http: HttpClient) {
     super(http);

@@ -10,6 +10,8 @@ import {Blogdetails} from '../_components/main/blogdetails/blogdetails';
 import {ContactMain} from '../_components/main/contact-main/contact-main';
 import {Comment} from '../_components/admin/comment/comment';
 import {ContactInfo} from '../_components/admin/contact-info/contact-info';
+import {Message} from '../_components/admin/message/message';
+import {Social} from '../_components/admin/social/social';
 
 
 export const routes: Routes = [
@@ -36,6 +38,8 @@ export const routes: Routes = [
         {path: 'blog', component: Blog, canActivate: [AuthGuard]},
         {path: 'comment', component: Comment, canActivate: [AuthGuard]},
         {path: 'contactinfo', component: ContactInfo, canActivate: [AuthGuard]},
+        {path: 'message', component: Message, canActivate: [AuthGuard]},
+        {path: 'social', component: Social, canActivate: [AuthGuard]},
       ]
   },
 ];
